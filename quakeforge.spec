@@ -6,7 +6,6 @@
 %define major        0
 %define majorgl      0
 %define majorsw      0
-%define distsuffix plf
 #
 %define libname      %mklibname %name %major
 %define libnamedevel %{libname}-devel
@@ -26,8 +25,6 @@ Group:		Games/Arcade
 License:	GPL
 URL:		http://www.quakeforge.net/
 BuildRoot:	%{_tmppath}/%{name}-root
-Vendor:		Penguin Liberation Front
-Packager:	Zombie Ryushu <ryushu@zarb.org>
 
 BuildRequires:  bison
 BuildRequires:	libogg-devel
