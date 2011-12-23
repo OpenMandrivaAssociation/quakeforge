@@ -594,7 +594,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/games/quakeforge/libQFsound.*a
 %{_libdir}/games/quakeforge/libQFrenderer_gl.*a
 %{_libdir}/games/quakeforge/libQFrenderer_sw32.*a
-%{_libdir}/games/quakeforge/libQFruamoko.*a
+# %{_libdir}/games/quakeforge/libQFruamoko.*a
 %{_libdir}/games/quakeforge/libQFutil.*a
 %{_libdir}/games/quakeforge/plugins/*.a
 # %{_libdir}/games/quakeforge/plugins/*.la
@@ -627,10 +627,10 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_gamesbindir}/qfcc
 %{_gamesbindir}/qfpreqcc
 %{_mandir}/man1/qfcc.1*
-%dir %{_includedir}/QF/ruamoko
-%{_includedir}/QF/ruamoko/*
-%dir %{_libdir}/games/quakeforge/ruamoko
-%{_libdir}/games/quakeforge/ruamoko/*.a
+# %dir %{_includedir}/QF/ruamoko
+# %{_includedir}/QF/ruamoko/*
+# %dir %{_libdir}/games/quakeforge/ruamoko
+# %{_libdir}/games/quakeforge/ruamoko/*.a
 
 # 3DFX clients
 %files clients-3dfx
