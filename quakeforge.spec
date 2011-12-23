@@ -26,7 +26,7 @@ License:	GPL
 URL:		http://www.quakeforge.net/
 BuildRoot:	%{_tmppath}/%{name}-root
 
-BuildRequires:  bison
+BuildRequires:  bison flex
 BuildRequires:	libogg-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	SDL-devel >= 1.2.0
