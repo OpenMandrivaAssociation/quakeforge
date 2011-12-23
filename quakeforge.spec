@@ -695,7 +695,7 @@ rm -rf ${RPM_BUILD_ROOT}
 # Common files
 %files common
 %defattr(-,root,root,755)
-%doc COPYING NEWS TODO doc/*.txt doc/config doc/data
+%doc COPYING NEWS TODO 
 %config(noreplace) %{_sysconfdir}/quakeforge.conf
 %attr(755,root,root) %{_gamesbindir}/qfpaktest
 %dir %{_gamesdatadir}/quakeforge
