@@ -560,8 +560,8 @@ rm -rf ${RPM_BUILD_ROOT}
 #%{_libdir}/games/quakeforge/libQFcsqc.so.*
 %{_libdir}/games/quakeforge/libQFgamecode.so
 %{_libdir}/games/quakeforge/libQFgamecode.so.*
-%{_libdir}/games/quakeforge/libQFgamecode_builtins.so
-%{_libdir}/games/quakeforge/libQFgamecode_builtins.so.*
+# %{_libdir}/games/quakeforge/libQFgamecode_builtins.so
+# %{_libdir}/games/quakeforge/libQFgamecode_builtins.so.*
 %{_libdir}/games/quakeforge/libQFgib.so
 %{_libdir}/games/quakeforge/libQFgib.so.*
 %{_libdir}/games/quakeforge/libQFimage.so
