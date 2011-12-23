@@ -2,7 +2,7 @@
 %define name         quakeforge
 %define namegl       %{name}gl
 %define namesw       %{name}sw
-%define version      0.5.5
+%define version      0.6.0
 %define major        0
 %define majorgl      0
 %define majorsw      0
@@ -17,13 +17,11 @@
 Summary:	QuakeForge 3D game engine
 Name:		%{name}
 Version:	%{version}
-Release:	%mkrel 4
+Release:	%mkrel 1
 Source:		%{name}-%{version}.tar.bz2
 Source1:	%{name}16.png.bz2
 Source2:	%{name}32.png.bz2
 Source3:	%{name}48.png.bz2
-Patch0:         quakeforge-0.5.5-static-abuse.patch
-Patch1:		quakeforge.patch
 Group:		Games/Arcade
 License:	GPL
 URL:		http://www.quakeforge.net/
@@ -325,8 +323,7 @@ This package contains several tools for use with QuakeForge:
 # Extract, compile and install
 %prep
 %setup -q
-%patch0 -p0 -b .static-abuse
-%patch1 -p0 -b .qf
+
 
 %build
 autoconf
