@@ -584,7 +584,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/games/quakeforge/libQFconsole.*a
 #%{_libdir}/games/quakeforge/libQFcsqc.*a
 %{_libdir}/games/quakeforge/libQFgamecode.*a
-%{_libdir}/games/quakeforge/libQFgamecode_builtins.*a
+# %{_libdir}/games/quakeforge/libQFgamecode_builtins.*a
 %{_libdir}/games/quakeforge/libQFgib.*a
 %{_libdir}/games/quakeforge/libQFimage.*a
 %{_libdir}/games/quakeforge/libQFjs.*a
@@ -597,7 +597,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/games/quakeforge/libQFruamoko.*a
 %{_libdir}/games/quakeforge/libQFutil.*a
 %{_libdir}/games/quakeforge/plugins/*.a
-%{_libdir}/games/quakeforge/plugins/*.la
+# %{_libdir}/games/quakeforge/plugins/*.la
 %dir %{_includedir}/QF
 %{_includedir}/QF/*.h
 %dir %{_includedir}/QF/GL
