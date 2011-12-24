@@ -607,6 +607,13 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/games/quakeforge/qfcc/include/*
 %{_libdir}/games/quakeforge/pkgconfig/*
 %{_libdir}/games/quakeforge/qfcc/lib/*
+%{_libdir}/games/quakeforge/libQFruamoko.la
+%{_libdir}/games/quakeforge/plugins/cd_file.la
+%{_libdir}/games/quakeforge/plugins/cd_linux.la
+%{_libdir}/games/quakeforge/plugins/cd_sdl.la
+%{_libdir}/games/quakeforge/plugins/console_client.la
+%{_libdir}/games/quakeforge/plugins/console_server.la
+%{_libdir}/games/quakeforge/plugins/snd_output_disk.la
 
 # GL libs
 %files -n %libnamegl
@@ -703,14 +710,12 @@ rm -rf ${RPM_BUILD_ROOT}
 %attr(755,root,root) %{_gamesbindir}/qfpaktest
 %dir %{_gamesdatadir}/quakeforge
 %dir %{_gamesdatadir}/quakeforge/QF
-%{_gamesdatadir}/quakeforge/QF/menu.dat*
 #%{_gamesdatadir}/quakeforge/QF/game.dat
 %{_iconsdir}/*.png
 %{_miconsdir}/*.png
 %{_liconsdir}/*.png
 %{_mandir}/man1/quakeforge.1.*
 %{_mandir}/man1/zpak.1.*
-%{_gamesdatadir}/quakeforge/QF/menu.plist
 %{_gamesdatadir}/quakeforge/QF/menu.*
 
 # Maptools
