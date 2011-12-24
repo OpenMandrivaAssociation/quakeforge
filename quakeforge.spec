@@ -604,7 +604,9 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_includedir}/QF/GL/*.h
 %dir %{_includedir}/QF/plugin
 %{_includedir}/QF/plugin/*.h
-%{_gameslibdir}/quakeforge/qfcc/include/*.h
+%{_gameslibdir}/quakeforge/qfcc/include/*
+%{_gameslibdir}/quakeforge/pkgconfig/*
+%{_gameslibdir}/quakeforge/qfcc/lib/*
 
 # GL libs
 %files -n %libnamegl
