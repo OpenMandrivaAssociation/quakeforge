@@ -725,7 +725,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/games/quakeforge/plugins/cd_linux.so*
 #%{_libdir}/games/quakeforge/plugins/cd_null.so*
 %{_libdir}/games/quakeforge/plugins/cd_sdl.so*
-%{_libdir}/games/quakeforge/plugins/cd_xmms.so*
+# %{_libdir}/games/quakeforge/plugins/cd_xmms.so*
 %{_libdir}/games/quakeforge/plugins/console_client.so*
 %{_libdir}/games/quakeforge/plugins/console_server.so*
 %{_libdir}/games/quakeforge/plugins/snd_output_disk.so*
