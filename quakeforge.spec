@@ -723,17 +723,17 @@ rm -rf ${RPM_BUILD_ROOT}
 %defattr(-,root,root,755)
 %{_libdir}/games/quakeforge/plugins/cd_file.so
 %{_libdir}/games/quakeforge/plugins/cd_linux.so*
-#%{_libdir}/games/quakeforge/plugins/cd_null.so*
+# %{_libdir}/games/quakeforge/plugins/cd_null.so*
 %{_libdir}/games/quakeforge/plugins/cd_sdl.so*
 # %{_libdir}/games/quakeforge/plugins/cd_xmms.so*
 %{_libdir}/games/quakeforge/plugins/console_client.so*
 %{_libdir}/games/quakeforge/plugins/console_server.so*
 %{_libdir}/games/quakeforge/plugins/snd_output_disk.so*
-#%{_libdir}/games/quakeforge/plugins/snd_output_null.so*
-%{_libdir}/games/quakeforge/plugins/snd_output_sdl.so*
-%{_libdir}/games/quakeforge/plugins/snd_render_default.so*
-%{_libdir}/games/quakeforge/plugins/snd_output_alsa.so*
-%{_libdir}/games/quakeforge/plugins/snd_output_oss.so*
+# %{_libdir}/games/quakeforge/plugins/snd_output_null.so*
+# %{_libdir}/games/quakeforge/plugins/snd_output_sdl.so*
+# %{_libdir}/games/quakeforge/plugins/snd_render_default.so*
+# %{_libdir}/games/quakeforge/plugins/snd_output_alsa.so*
+# %{_libdir}/games/quakeforge/plugins/snd_output_oss.so*
 
 # Servers
 %files servers
