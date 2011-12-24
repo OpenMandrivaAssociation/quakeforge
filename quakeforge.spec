@@ -594,7 +594,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/games/quakeforge/libQFsound.*a
 %{_libdir}/games/quakeforge/libQFrenderer_gl.*a
 %{_libdir}/games/quakeforge/libQFrenderer_sw32.*a
-%{_libdir}games/quakeforge/libQFruamoko.a
+%{_libdir}/games/quakeforge/libQFruamoko.a
 %{_libdir}/games/quakeforge/libQFutil.*a
 %{_libdir}/games/quakeforge/plugins/*.a
 # %{_libdir}/games/quakeforge/plugins/*.la
