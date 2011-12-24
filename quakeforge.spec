@@ -594,7 +594,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/games/quakeforge/libQFsound.*a
 %{_libdir}/games/quakeforge/libQFrenderer_gl.*a
 %{_libdir}/games/quakeforge/libQFrenderer_sw32.*a
-# %{_libdir}/games/quakeforge/libQFruamoko.*a
+%{_libdir}games/quakeforge/libQFruamoko.a
 %{_libdir}/games/quakeforge/libQFutil.*a
 %{_libdir}/games/quakeforge/plugins/*.a
 # %{_libdir}/games/quakeforge/plugins/*.la
@@ -604,6 +604,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_includedir}/QF/GL/*.h
 %dir %{_includedir}/QF/plugin
 %{_includedir}/QF/plugin/*.h
+%{_gameslibdir}/quakeforge/qfcc/include/*.h
 
 # GL libs
 %files -n %libnamegl
@@ -706,6 +707,9 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_miconsdir}/*.png
 %{_liconsdir}/*.png
 %{_mandir}/man1/quakeforge.1.*
+%{_mandir}/man1/zpak.1.*
+%{_gamesdatadir}/quakeforge/QF/menu.plist
+%{_gamesdatadir}/quakeforge/QF/menu.sym.gz
 
 # Maptools
 %files maptools
@@ -715,6 +719,8 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_gamesbindir}/qfbsp
 %{_gamesbindir}/qflight
 %{_gamesbindir}/qfvis
+%{_gamesbindir}/qflmp
+%{_gamesbindir}/qfpc
 %{_mandir}/man1/qflight.1*
 %{_mandir}/man1/qfvis.1*
 
@@ -727,7 +733,6 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/games/quakeforge/plugins/cd_sdl.so*
 # %{_libdir}/games/quakeforge/plugins/cd_xmms.so*
 %{_libdir}/games/quakeforge/plugins/console_client.so*
-%{_libdir}/games/quakeforge/plugins/console_server.so*
 %{_libdir}/games/quakeforge/plugins/snd_output_disk.so*
 # %{_libdir}/games/quakeforge/plugins/snd_output_null.so*
 # %{_libdir}/games/quakeforge/plugins/snd_output_sdl.so*
