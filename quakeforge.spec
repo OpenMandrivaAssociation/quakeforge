@@ -711,7 +711,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_mandir}/man1/quakeforge.1.*
 %{_mandir}/man1/zpak.1.*
 %{_gamesdatadir}/quakeforge/QF/menu.plist
-%{_gamesdatadir}/quakeforge/QF/menu.sym.gz
+%{_gamesdatadir}/quakeforge/QF/menu.sym.*
 
 # Maptools
 %files maptools
