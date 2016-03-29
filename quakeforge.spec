@@ -10,12 +10,17 @@
 #
 %define libnamegl    %mklibname %{namegl} %{majorgl}
 %define libnamesw    %mklibname %{namesw} %{majorsw}
+%define _disable_lto %{nil}
+%define date	20160329
 
 Summary:	QuakeForge 3D game engine
 Name:		quakeforge
 Version:	0.7.2
 Release:	1
-Source:		http://prdownloads.sourceforge.net/quake/%{name}-%{version}.tar.bz2
+# git clone git://git.code.sf.net/p/quake/quakeforge
+# cd quakeforge
+# git archive --format=tar --prefix quakeforge-0.7.2-$(date +%Y%m%d)/ HEAD | xz -vf > ../quakeforge-0.7.2-$(date +%Y%m%d).tar.xz
+Source:		http://prdownloads.sourceforge.net/quake/%{name}-%{version}-%{date}.tar.xz
 Source1:	%{name}16.png.bz2
 Source2:	%{name}32.png.bz2
 Source3:	%{name}48.png.bz2
@@ -314,10 +319,11 @@ This package contains several tools for use with QuakeForge:
 
 # Extract, compile and install
 %prep
-%setup -q
+%setup -qn %{name}-%{version}-%{date}
 
 
 %build
+./bootstrap
 autoconf
 
 # Do not use the --with-svga switch if you want to build the SVGA
