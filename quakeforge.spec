@@ -1,8 +1,6 @@
 %define Werror_cflags	%nil
-%define name         quakeforge
 %define namegl       %{name}gl
 %define namesw       %{name}sw
-%define version      0.6.0
 %define major        0
 %define majorgl      0
 %define majorsw      0
@@ -14,25 +12,22 @@
 %define libnamesw    %mklibname %{namesw} %{majorsw}
 
 Summary:	QuakeForge 3D game engine
-Name:		%{name}
-Version:	%{version}
-Release:	%mkrel 1
-Source:		%{name}-%{version}.tar.bz2
+Name:		quakeforge
+Version:	0.7.2
+Release:	1
+Source:		http://prdownloads.sourceforge.net/quake/%{name}-%{version}.tar.bz2
 Source1:	%{name}16.png.bz2
 Source2:	%{name}32.png.bz2
 Source3:	%{name}48.png.bz2
 Group:		Games/Arcade
 License:	GPL
 URL:		http://www.quakeforge.net/
-BuildRoot:	%{_tmppath}/%{name}-root
 
 BuildRequires:  bison flex
-BuildRequires:	libogg-devel
-BuildRequires:	libvorbis-devel
-BuildRequires:	SDL-devel >= 1.2.0
-BuildRequires:  xmms-devel >= 0.9.5.1
-BuildRequires:	GL-devel
-BuildRequires:	svgalib-devel
+BuildRequires:	pkgconfig(ogg)
+BuildRequires:	pkgconfig(vorbis)
+BuildRequires:	pkgconfig(flac)
+BuildRequires:	SDL12-devel
 
 %description
 QuakeForge is a source port of Quake and QuakeWorld, the successors to id
@@ -329,7 +324,7 @@ autoconf
 # clients, it will fail. Building the SVGA client just depends on
 # having libsvgalib-devel installed yes or no...
 
-CFLAGS="%{optflags}" \
+CC="%{__cc}" CX="%{__cxx}" CFLAGS="%{optflags}" \
 ./configure --prefix="%{_prefix}" \
 	    --bindir="%{_gamesbindir}" \
 	    --datadir="%{_datadir}" \
@@ -345,31 +340,32 @@ CFLAGS="%{optflags}" \
 	    \
 	    --disable-debug \
 	    --with-arch="%{_target_cpu}" \
+	    --disable-xmms \
 	    --without-fbdev \
 	    --without-svga
 
 %make
 
 %install
-rm -rf ${RPM_BUILD_ROOT}
+rm -rf %{buildroot}
 
-make install DESTDIR="${RPM_BUILD_ROOT}" \
-	     PLUGINDIR="${RPM_BUILD_ROOT}%{_libdir}/games/quakeforge/plugins"
+make install DESTDIR="%{buildroot}" \
+	     PLUGINDIR="%{buildroot}%{_libdir}/games/quakeforge/plugins"
 
-mkdir -p ${RPM_BUILD_ROOT}%{_sysconfdir}
-cp RPM/quakeforge.conf ${RPM_BUILD_ROOT}%{_sysconfdir}
-bzip2 -c doc/man/quakeforge.1 > ${RPM_BUILD_ROOT}%{_mandir}/man1/quakeforge.1.bz2
-cp tools/qwaq/.libs/qwaq ${RPM_BUILD_ROOT}%{_gamesbindir}
+mkdir -p %{buildroot}%{_sysconfdir}
+cp RPM/quakeforge.conf %{buildroot}%{_sysconfdir}
+bzip2 -c doc/man/quakeforge.1 > %{buildroot}%{_mandir}/man1/quakeforge.1.bz2
+cp tools/qwaq/.libs/qwaq %{buildroot}%{_gamesbindir}
 
 # Icons
-install -d ${RPM_BUILD_ROOT}{%_miconsdir,%_liconsdir}
-bzcat %{SOURCE1} > ${RPM_BUILD_ROOT}%{_miconsdir}/%name.png
-bzcat %{SOURCE2} > ${RPM_BUILD_ROOT}%{_iconsdir}/%name.png
-bzcat %{SOURCE3} > ${RPM_BUILD_ROOT}%{_liconsdir}/%name.png
+install -d %{buildroot}{%_miconsdir,%_liconsdir}
+bzcat %{SOURCE1} > %{buildroot}%{_miconsdir}/%name.png
+bzcat %{SOURCE2} > %{buildroot}%{_iconsdir}/%name.png
+bzcat %{SOURCE3} > %{buildroot}%{_liconsdir}/%name.png
 
 # Menus
-install -d ${RPM_BUILD_ROOT}%{_menudir}
-install -d ${RPM_BUILD_ROOT}%{_datadir}/applications
+install -d %{buildroot}%{_menudir}
+install -d %{buildroot}%{_datadir}/applications
 
 for QFCLIENT in fbdev glx sdl sgl x11 ;do
 
@@ -383,7 +379,7 @@ for QFCLIENT in fbdev glx sdl sgl x11 ;do
 
     esac
 
-cat << EOF > ${RPM_BUILD_ROOT}%{_menudir}/%{name}-clients-${QFCLIENT}
+cat << EOF > %{buildroot}%{_menudir}/%{name}-clients-${QFCLIENT}
 ?package(%{name}-clients-${QFCLIENT}): needs="x11" \\
 				 section="More Applications/Games/Arcade" \\
 				 title="QF QuakeWorld ${TITLE}" \\
@@ -401,7 +397,7 @@ cat << EOF > ${RPM_BUILD_ROOT}%{_menudir}/%{name}-clients-${QFCLIENT}
                 		 xdg="true"
 EOF
 
-cat > ${RPM_BUILD_ROOT}%{_datadir}/applications/mandriva-%{name}-qw-${QFCLIENT}.desktop << EOF
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}-qw-${QFCLIENT}.desktop << EOF
 [Desktop Entry]
 Name=QF QuakeWorld ${TITLE}
 Comment=QuakeForge 3D game engine
@@ -414,7 +410,7 @@ Encoding=UTF-8
 Categories=Game;ArcadeGame;X-MandrivaLinux-MoreApplications-Games-Arcade;
 EOF
 
-cat > ${RPM_BUILD_ROOT}%{_datadir}/applications/mandriva-%{name}-nq-${QFCLIENT}.desktop << EOF
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}-nq-${QFCLIENT}.desktop << EOF
 [Desktop Entry]
 Name=QF NQuake ${TITLE}
 Comment=QuakeForge 3D game engine
@@ -432,7 +428,7 @@ for QFPACK in hipnotic rogue ; do
 [ "${QFPACK}" = "hipnotic" ] && QFPACKTITLE="Mission Pack 1 - Scourge of Armagon"
 [ "${QFPACK}" = "rogue" ] && QFPACKTITLE="Mission Pack 2 - Dissolution of Eternity"
 
-cat > ${RPM_BUILD_ROOT}%{_datadir}/applications/mandriva-%{name}-nq-${QFCLIENT}-${QFPACK}.desktop << EOF
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}-nq-${QFCLIENT}-${QFPACK}.desktop << EOF
 [Desktop Entry]
 Name=QF NQuake ${TITLE}: ${QFPACKTITLE}
 Comment=QuakeForge 3D game engine
@@ -450,7 +446,7 @@ done
 done
 
 # Script to test if pakfiles are installed
-cat > ${RPM_BUILD_ROOT}%{_gamesbindir}/qfpaktest << EOF
+cat > %{buildroot}%{_gamesbindir}/qfpaktest << EOF
 #!/bin/bash
 
 for GAME in hipnotic rogue ; do
@@ -510,9 +506,6 @@ done
 exit 0
 EOF
 
-%clean
-rm -rf ${RPM_BUILD_ROOT}
-
 %post clients-fbdev
 %{update_menus}
 
@@ -543,13 +536,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %postun clients-x11
 %{clean_menus}
 
-%post -n %{libname} -p /sbin/ldconfig
-
-%postun -n %{libname} -p /sbin/ldconfig
-
-
 %files -n %libname
-%defattr(-,root,root,755)
 %dir %{_libdir}/games/quakeforge
 %dir %{_libdir}/games/quakeforge/plugins
 %{_libdir}/games/quakeforge/libQFcd.so
@@ -579,7 +566,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # Devel
 %files -n %libnamedevel
-%defattr(-,root,root,755)
 %{_libdir}/games/quakeforge/libQFcd.*a
 %{_libdir}/games/quakeforge/libQFconsole.*a
 #%{_libdir}/games/quakeforge/libQFcsqc.*a
@@ -617,7 +603,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # GL libs
 %files -n %libnamegl
-%defattr(-,root,root,755)
 %{_libdir}/games/quakeforge/libQFmodels_gl.so
 %{_libdir}/games/quakeforge/libQFmodels_gl.so.*
 %{_libdir}/games/quakeforge/libQFrenderer_gl.so
@@ -625,7 +610,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # Software libs
 %files -n %libnamesw
-%defattr(-,root,root,755)
 %{_libdir}/games/quakeforge/libQFmodels_sw.so
 %{_libdir}/games/quakeforge/libQFmodels_sw.so.*
 %{_libdir}/games/quakeforge/libQFrenderer_sw32.so
@@ -633,7 +617,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # Qfcc compiler
 %files qfcc-devel
-%defattr(-,root,root,755)
 %{_gamesbindir}/qfcc
 %{_gamesbindir}/qfpreqcc
 %{_mandir}/man1/qfcc.1*
@@ -644,13 +627,11 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # 3DFX clients
 %files clients-3dfx
-%defattr(-,root,root,755)
 # %{_gamesbindir}/qw-client-3dfx
 # %{_gamesbindir}/nq-3dfx
 
 # Framebuffer clients
 %files clients-fbdev
-%defattr(-,root,root,755)
 #%{_gamesbindir}/qw-client-fbdev
 #%{_gamesbindir}/nq-3dfx
 %{_menudir}/%{name}-clients-fbdev
@@ -660,7 +641,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # GLX clients
 %files clients-glx
-%defattr(-,root,root,755)
 %{_gamesbindir}/qw-client-glx
 %{_gamesbindir}/nq-glx
 %{_menudir}/%{name}-clients-glx
@@ -669,7 +649,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # SDL clients
 %files clients-sdl
-%defattr(-,root,root,755)
 %{_gamesbindir}/qw-client-sdl
 %{_gamesbindir}/qw-client-sdl32
 %{_gamesbindir}/nq-sdl
@@ -680,7 +659,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # SDLGL clients
 %files clients-sgl
-%defattr(-,root,root,755)
 %{_gamesbindir}/qw-client-sgl
 %{_gamesbindir}/nq-sgl
 %{_menudir}/%{name}-clients-sgl
@@ -689,13 +667,11 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # SVGA clients
 %files clients-svga
-%defattr(-,root,root,755)
 # %attr(4755,root,root) %{_gamesbindir}/qw-client-svga
 # %attr(4755,root,root) %{_gamesbindir}/nq-svga
 
 # X11 clients
 %files clients-x11
-%defattr(-,root,root,755)
 %{_gamesbindir}/qw-client-x11
 %{_gamesbindir}/nq-x11
 %{_menudir}/%{name}-clients-x11
@@ -704,7 +680,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # Common files
 %files common
-%defattr(-,root,root,755)
 %doc COPYING NEWS TODO 
 %config(noreplace) %{_sysconfdir}/quakeforge.conf
 %attr(755,root,root) %{_gamesbindir}/qfpaktest
@@ -720,7 +695,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # Maptools
 %files maptools
-%defattr(-,root,root,755)
 %{_gamesbindir}/bsp2img
 %{_gamesbindir}/hw-master
 %{_gamesbindir}/qfbsp
@@ -733,7 +707,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # Plugins
 %files plugins
-%defattr(-,root,root,755)
 %{_libdir}/games/quakeforge/plugins/cd_file.so
 %{_libdir}/games/quakeforge/plugins/cd_linux.so*
 # %{_libdir}/games/quakeforge/plugins/cd_null.so*
@@ -749,7 +722,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # Servers
 %files servers
-%defattr(-,root,root,755)
 %{_gamesbindir}/qw-server
 %{_gamesbindir}/nq-server
 %{_gamesbindir}/qw-master
@@ -758,7 +730,6 @@ rm -rf ${RPM_BUILD_ROOT}
 
 # Tools
 %files utils
-%defattr(-,root,root,755)
 %{_gamesbindir}/pak
 %{_gamesbindir}/zpak
 #%{_gamesbindir}/qfdefs
@@ -769,4 +740,3 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_gamesbindir}/wad
 %{_mandir}/man1/pak.1*
 %{_mandir}/man1/wad.1*
-
