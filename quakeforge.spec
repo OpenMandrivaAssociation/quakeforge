@@ -26,7 +26,7 @@ Source2:	%{name}32.png.bz2
 Source3:	%{name}48.png.bz2
 Group:		Games/Arcade
 License:	GPL
-URL:		http://www.quakeforge.net/
+URL:		https://www.quakeforge.net/
 
 BuildRequires:  bison flex
 BuildRequires:	pkgconfig(ogg)
